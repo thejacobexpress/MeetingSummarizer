@@ -1,5 +1,7 @@
 import openai
 
+from Audio import recordAndWriteWavFile
+
 userInput = """[Opening]
 Jacob: Good afternoon, everyone. Thanks for joining. Let’s get started
 Sarah: Afternoon, Jacob. Hope everyone’s doing well.
@@ -23,18 +25,15 @@ Kevin: No, that covers it.
 Mia: Thanks, everyone!
 Jacob: Appreciate your time. Meeting adjourned."""
 
-try:
-  completion = openai.chat.completions.create(
+completion = openai.chat.completions.create(
     model="gpt-3.5-turbo",
-    store=True,
+    store=False,
     messages=[
-      {"role": "system", "content": "Write a 3 bullet point summary based on the prompt the user inputs."},
-      {"role": "user", "content": userInput}
+        {"role": "system", "content": "Write a bullet point summary based on the prompt the user inputs."},
+        {"role": "user", "content": userInput}
     ]
-  )
-except Exception as e:
-  print("Did not work!!!")
-  print(e)
+)
 
 if __name__ == "__main__":
-    print(completion.choices[0].message.content);
+    recordAndWriteWavFile()
+    # print(completion.choices[0].message.content);
