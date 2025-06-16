@@ -21,7 +21,7 @@ def recordAndWriteWavFile():
 
     # Write audio into frames array from stream.
     frames = []
-    for i in range(0, 100):
+    for i in range(0, 10):
         print(i)
         data = stream.read(1024)
         frames.append(data)
