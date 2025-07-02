@@ -61,7 +61,6 @@ def recordAndWriteWavFile():
 
     Gmail.transcript = convertWavToText(filePath) # Convert .WAV file to text using OpenAI's Whisper-1 model.
     Gmail.summary = summarizeText(Gmail.transcript) # Summarize the generated transcript using GPT.
-    print(createEmailStructure())
     sendEmail() # Finally, send the transcript and the generated summary using Gmail's API.
     time.sleep(2) # pyaud.open called too often results in "Invalid number of channels" error.
     # Default back to listening for a button press:
