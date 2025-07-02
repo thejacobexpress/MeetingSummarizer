@@ -1,6 +1,17 @@
-GPT-based project that summarizes meetings recorded in .wav files and sends them to the user's email from a Raspberry Pi.
+# Meeting Summarizer AI Project
 
-How to re-create this project:
+GPT-based Python project that summarizes meetings recorded in .wav files and sends them to the user's email from a Raspberry Pi.
+
+
+
+Materials needed to re-create this project:
+1. Raspberry Pi
+2. Button
+3. LED
+4. Microphone (attached to Pi through USB)
+5. At least 4 jumper wires to connect button and light to Pi
+
+Steps to re-creating this project:
 1. Ensure all required libraries are installed onto a Python virtual environment on your Pi (see requirements.txt).
 2. Create an OpenAI account and deposit a minimum of 5 US dollars into it (see https://platform.openai.com/docs/overview).
 3. Create an OpenAI API key (see https://platform.openai.com/settings/organization/api-keys) and make it an environment variable on your Pi. Then change line 4 of Gpt.py to what you named your environment variable.
