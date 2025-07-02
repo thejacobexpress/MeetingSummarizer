@@ -1,7 +1,7 @@
 import os.path
 from email.message import EmailMessage
 from email.mime.text import MIMEText
-#from email.mime.multipart import MIMEMultipart
+from email.mime.multipart import MIMEMultipart
 import base64
 
 import google.auth
@@ -39,7 +39,7 @@ def createHTMLEmailStructure():
     transcriptTextHTML = "<p>" + transcript + "</p>"
     return summaryPrefaceHTML + summaryTextHTML + transcriptPrefaceHTML + transcriptTextHTML
 
-def sendEmail(plainText, HTMLText):
+def sendEmail():
     creds = None
     try:
         creds = c.Credentials.from_authorized_user_file(tokenLoc, ['https://mail.google.com/'])
@@ -52,12 +52,14 @@ def sendEmail(plainText, HTMLText):
 
     service = build('gmail', 'v1', credentials = creds)
 
-    message = EmailMessage()
-    #message = MIMEMultipart("alternative")
+    message = MIMEMultipart("alternative")
 
-    message.set_content(MIMEText(createHTMLEmailStructure(), "html"))
-    #message.attach(MIMEText(plainText, "plain"))
-    #message.attach(MIMEText(HTMLText, "html"))
+    # Create an HTML version and a plain text version of the email to fallback on.
+    plain = MIMEText(createEmailStructure(), 'plain')
+    message.attach(plain)
+    html = MIMEText(createHTMLEmailStructure(), "html")
+    message.attach(html)
+
     message["To"] = recipient
     message["From"] = "McKeeAI" + sender
     message["Subject"] = subject
@@ -65,5 +67,5 @@ def sendEmail(plainText, HTMLText):
     encodedMessage = base64.urlsafe_b64encode(message.as_bytes()).decode()
 
     createMessage = {"raw": encodedMessage}
-    draft = service.users().messages().send(userId="me", body=createMessage).execute()
+    draft = service.users().messages().send(userId="me", body=createMessage).execute() # Send email!
     print("Email sent")
