@@ -1,17 +1,33 @@
-# Meeting Summarizer AI Project
+# Meeting Summarizer Project
 
-GPT-based Python project that summarizes meetings recorded in .wav files and sends them to the user's email from a Raspberry Pi.
+A GPT-based Python project that summarizes meetings recorded in .wav files and sends them to the user's email from a Raspberry Pi.
 
+## Overview
 
+When the user presses the button on top of the Pi's case, the microphone connected to the Pi begins recording the conversation of the occuring meeting and writes that data into a .WAV file. Once the meeting is over and the user presses the button again, OpenAI's Whisper-1 and GPT-3.5-Turbo models are used to convert that .WAV file into text, and then transform that text into a summary of the recorded meeting. If needed, the summary is automatically translated into English by Whisper-1. Then, the summary is immediately sent to any stakeholders of the meeting through the Gmail API.
 
-Materials needed to re-create this project:
+## Why this project?
+
+This project was taken on to learn how to utilize LLMs (Large Language Models) with code, and to learn a little about the hardware side of engineering by utilizing a Raspberry Pi and an external input and output (button and light). As an incoming college freshman majoring in computer engineering, I wanted to get a head-start on what I am going to be learning at my university--on both the software and the hardware aspects of my future studies.
+
+## What was learned?
+
+- How to utilize LLMs through APIs
+- How to send emails through the Gmail API
+- How to wire external inputs and outputs onto a Raspberry Pi header
+- How to listen to input from physical buttons and display output through LEDs
+- How to record audio through a microphone attached by USB
+
+## How to re-create this project
+
+### Ingredients
 1. Raspberry Pi
 2. Button
 3. LED
 4. Microphone (attached to Pi through USB)
 5. At least 4 jumper wires to connect button and light to Pi
 
-Steps to re-creating this project:
+### Recipe
 1. Ensure all required libraries are installed onto a Python virtual environment on your Pi (see requirements.txt).
 2. Create an OpenAI account and deposit a minimum of 5 US dollars into it (see https://platform.openai.com/docs/overview).
 3. Create an OpenAI API key (see https://platform.openai.com/settings/organization/api-keys) and make it an environment variable on your Pi. Then change line 4 of Gpt.py to what you named your environment variable.
