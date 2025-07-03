@@ -2,6 +2,8 @@
 
 A Raspberry Pi-based project that summarizes meetings recorded in .WAV files using an LLM and sends them to the user's email.
 
+https://github.com/user-attachments/assets/14318a61-8db2-4112-b5f4-c6940cc44f83
+
 ## Overview
 
 When the user presses the button on top of the Pi's case, the microphone connected to the Pi begins recording the conversation of the occuring meeting and writes that data into a .WAV file. Once the meeting is over and the user presses the button again, OpenAI's Whisper-1 and GPT-3.5-Turbo models are used to convert that .WAV file into text, and then transform that text into a summary of the recorded meeting. If needed, the summary is automatically translated into English by Whisper-1. Then, the summary is immediately sent to any stakeholders of the meeting through the Gmail API.
