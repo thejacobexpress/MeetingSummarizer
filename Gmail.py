@@ -27,14 +27,36 @@ subject = "Your meeting summary is ready."
 
 def createEmailStructure():
     # Create a draft of an email in plain text
+    editedSummary = ""
+    firstDash = True
+    for i in list(summary): # Go through summary and make each bullet point on a different line
+        if i == "-" and not firstDash:
+            editedSummary += "\n"
+            editedSummary += i
+        elif i == "-":
+            firstDash = False
+            editedSummary += i
+        else:
+            editedSummary += i
     summaryPreface = "Here is the summary of your meeting:\n"
     transcriptPreface = "\n\nWant a closer look at your meeting? Here is the transcript: \n"
-    return summaryPreface + summary + transcriptPreface + transcript
+    return summaryPreface + editedSummary + transcriptPreface + transcript
     
 def createHTMLEmailStructure():
     # Create a draft of an email in HTML
+    editedSummary = ""
+    firstDash = True
+    for i in list(summary): # Go through summary and make each bullet point on a different line
+        if i == "-" and not firstDash:
+            editedSummary += "<br><br>"
+            editedSummary += i
+        elif i == "-":
+            firstDash = False
+            editedSummary += i
+        else:
+            editedSummary += i
     summaryPrefaceHTML = "<p><strong>Here is the summary of your meeting:</strong></p>"
-    summaryTextHTML = "<p>" + summary + "<br><br></p>"
+    summaryTextHTML = "<p>" + editedSummary + "<br><br></p>"
     transcriptPrefaceHTML = "<p>Want a closer look at your meeting? <strong>Here is the transcript:</strong></p>"
     transcriptTextHTML = "<p>" + transcript + "</p>"
     return summaryPrefaceHTML + summaryTextHTML + transcriptPrefaceHTML + transcriptTextHTML
